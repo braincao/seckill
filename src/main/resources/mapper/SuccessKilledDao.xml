@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.braincao.dao.SuccessKilledDao">
+    <!--目的:为DAO接口方法提供sql语句配置-->
+    <!--参数多个的时候可以不写，dao层用的时候可以通过@param("xxx")来自动识别;返回值如果是列表，写列表里面的类型即可;类型不用写包名，配置时配置就行-->
+    <!--<![CDATA[<=]]>是XML转义用的-->
+
+    <insert id="insertSuccessKilled">
+        <!--INSERT ignore INTO:主键冲突时不报错，而是返回0-->
+        INSERT ignore INTO success_killed(seckill_id, user_phone, state)
+        VALUES (#{seckillId}, #{userPhone}, 0)
+    </insert>
+
+    <!--根据seckillId查询SuccessKilled实体(也携带Seckill秒杀商品对象实体)-->
+    <!--mybatis把结果映射到SuccessKilled，同时映射属性seckill属性-->
+    <!--由此可以看出，mybatis可以很自由的控制sql-->
+    <select id="queryByIdWithSeckill" resultType="SuccessKilled">
+        SELECT
+          sk.seckill_id,
+          sk.user_phone,
+          sk.state,
+          sk.create_time,
+          s.seckill_id "seckill.seckill_id",
+          s.name "seckill.name",
+          s.number "seckill.number",
+          s.start_time "seckill.start_time",
+          s.end_time "seckill.end_time",
+          s.create_time "seckill.create_time"
+        FROM success_killed sk INNER JOIN seckill s
+        ON sk.seckill_id = s.seckill_id
+        WHERE sk.seckill_id = #{seckillId} AND sk.user_phone = #{userPhone}
+    </select>
+</mapper>

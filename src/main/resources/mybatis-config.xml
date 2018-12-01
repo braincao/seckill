@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+        PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+    <!--配置全局属性-->
+    <settings>
+        <!--默认为false，设为true后我们使用jdbc的getGeneratedKeys可以获取数据库的自增主键值-->
+        <setting name="useGeneratedKeys" value="true"/>
+
+        <!--默认为true，使用列别名替换列名
+            select name as title from table-->
+        <setting name="useColumnLabel" value="true"/>
+
+        <!--开启驼峰命名转换:table(create_time) -> entity(createTime)-->
+        <setting name="mapUnderscoreToCamelCase" value="true"/>
+
+    </settings>
+
+    <!--其他的mybatis配置如连接数据库等都在mybatis与spring整合中一起配置-->
+</configuration>
+
+    <!--<typeAliases>-->
+    <!--<typeAlias alias="UserAlias" type="org.apache.ibatis.submitted.complex_property.User"/>-->
+    <!--</typeAliases>-->
+
+    <!--拦截器注册。需要写在前面，否则报错，这里注册一个分页拦截器-->
+    <!--<plugins>-->
+        <!--<plugin interceptor="com.braincao.interceptor.PageInterceptor"/>-->
+    <!--</plugins>-->
+
+    <!--<environments default="development">-->
+        <!--<environment id="development">-->
+            <!--<transactionManager type="JDBC">-->
+                <!--<property name="" value=""/>-->
+            <!--</transactionManager>-->
+            <!--<dataSource type="UNPOOLED">-->
+                <!--<property name="driver" value="com.mysql.jdbc.Driver"/>-->
+                <!--<property name="url" value="jdbc:mysql://127.0.0.1:3306/micro_message?characterEncoding=UTF-8"/>-->
+                <!--<property name="username" value="root"/>-->
+                <!--<property name="password" value="123456"/>-->
+            <!--</dataSource>-->
+        <!--</environment>-->
+    <!--</environments>-->
+
+
+    <!--<mappers>-->
+        <!--<mapper resource="com/braincao/configs/sql/MessageMapper.xml"/>-->
+        <!--<mapper resource="com/braincao/configs/sql/CommandMapper.xml"/>-->
+        <!--<mapper resource="com/braincao/configs/sql/CommandContentMapper.xml"/>-->
+    <!--</mappers>-->
+
